@@ -61,6 +61,8 @@ ResourceManger& ResourceManger::operator=(const ResourceManger& other) {
 }
 
 
+
+
 ResourceManger::ResourceManger(ResourceManger&& other) noexcept : size(other.size), data(other.data) {
     other.data = nullptr;
     other.size = 0;
@@ -82,6 +84,19 @@ ResourceManger& ResourceManger::operator=(ResourceManger&& other) noexcept {
     return *this;
 }
 
+void func_by_value(ResourceManger rn) {
+    
+}
+
+void func_by_reference(const ResourceManger& rn) {
+
+}
+
+
+void func_by_move(ResourceManger&& rn) {
+
+}
+
 int main() {
    ResourceManger res1(10);
 
@@ -90,6 +105,9 @@ int main() {
    ResourceManger res3 = std::move(res1);
    res2 = res3;
    
+   func_by_value(res1);
+   func_by_reference(res1);
+   func_by_move(std::move(res1));
    
    /*
     ResourceManger rn(1);
