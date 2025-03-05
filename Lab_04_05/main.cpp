@@ -1,5 +1,8 @@
 #include <iostream>
 #include <memory>
+#include <vector>
+#include <array>
+#include <map>
 
 class BankAccount {
 private:
@@ -44,11 +47,25 @@ public:
 };
 
 int main() {
-    BankAccount account(420);
-    std::cout << "The account has a balance of " << account.get_balance() << std::endl;
-    account.set_balance(69);
-    std::cout << "The account has a balance of " << account.get_balance() << std::endl;
-    account.withdraw(100000);
+    std::array <BankAccount, 4> arr = {
+        BankAccount{1}, BankAccount{2},
+        BankAccount{3}, BankAccount{4}
+    };
+
+    for(const auto& account : arr) {
+        std::cout << account.get_balance() << std::endl;
+    }
+
+    std::map<std::string, BankAccount> accounts;
+    accounts.insert({"11123123", BankAccount(420)});
+
+    for(const auto& elem : accounts) {
+        std::cout << elem.first << " " << elem.second.get_balance();
+    }
+
+    for(const auto& [account_number, account] : accounts) {
+        std::cout << account_number << " " << account.get_balance();
+    }
 
     return 0;
 }
